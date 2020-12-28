@@ -19,6 +19,18 @@ pub fn sort3<T: PartialOrd + Copy>(arr: &mut [T; 3]) {
     }
 }
 
+pub fn sort4<T: PartialOrd + Copy>(arr: &mut [T; 4]) {
+    unsafe {
+        sort_2(&mut arr[0], &mut arr[2]);
+        sort_2(&mut arr[1], &mut arr[3]);
+
+        sort_2(&mut arr[0], &mut arr[1]);
+        sort_2(&mut arr[2], &mut arr[3]);
+
+        sort_2(&mut arr[1], &mut arr[2]);
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -48,6 +60,21 @@ mod tests {
                     let mut arr = [a0, a1, a2];
                     sort3(&mut arr);
                     check_sorted(&arr);
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn test_sort4() {
+        for a0 in 0..=1 {
+            for a1 in 0..=1 {
+                for a2 in 0..=1 {
+                    for a3 in 0..=1 {
+                        let mut arr = [a0, a1, a2, a3];
+                        sort4(&mut arr);
+                        check_sorted(&arr);
+                    }
                 }
             }
         }
