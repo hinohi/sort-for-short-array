@@ -10,3 +10,7 @@ env: macOS
 |:------:|-----:|
 | `[T]::sort` | 11151 ps |
 | `sorting_network::sort5` | 595 ps |
+
+## Sorting Network
+
+https://www.wolframcloud.com/objects/demonstrations/SortingNetworks-source.nb
