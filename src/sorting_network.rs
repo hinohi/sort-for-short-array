@@ -23,10 +23,8 @@ pub fn sort4<T: PartialOrd + Copy>(arr: &mut [T; 4]) {
     unsafe {
         sort_2(&mut arr[0], &mut arr[2]);
         sort_2(&mut arr[1], &mut arr[3]);
-
         sort_2(&mut arr[0], &mut arr[1]);
         sort_2(&mut arr[2], &mut arr[3]);
-
         sort_2(&mut arr[1], &mut arr[2]);
     }
 }
@@ -55,59 +53,49 @@ mod tests {
         assert_eq!(arr, v.as_slice());
     }
 
+    fn as_arr<const N: usize>(b: u32) -> [i32; N] {
+        let mut arr = [0; N];
+        for i in 0..N {
+            if b & (1 << i) != 0 {
+                arr[i] = 1;
+            }
+        }
+        arr
+    }
+
     #[test]
     fn test_sort2() {
-        for a0 in 0..=1 {
-            for a1 in 0..=1 {
-                let mut arr = [a0, a1];
-                sort2(&mut arr);
-                check_sorted(&arr);
-            }
+        for b in 1..1 << 2 {
+            let mut arr = as_arr(b);
+            sort2(&mut arr);
+            check_sorted(&arr);
         }
     }
 
     #[test]
     fn test_sort3() {
-        for a0 in 0..=1 {
-            for a1 in 0..=1 {
-                for a2 in 0..=1 {
-                    let mut arr = [a0, a1, a2];
-                    sort3(&mut arr);
-                    check_sorted(&arr);
-                }
-            }
+        for b in 1..1 << 3 {
+            let mut arr = as_arr(b);
+            sort3(&mut arr);
+            check_sorted(&arr);
         }
     }
 
     #[test]
     fn test_sort4() {
-        for a0 in 0..=1 {
-            for a1 in 0..=1 {
-                for a2 in 0..=1 {
-                    for a3 in 0..=1 {
-                        let mut arr = [a0, a1, a2, a3];
-                        sort4(&mut arr);
-                        check_sorted(&arr);
-                    }
-                }
-            }
+        for b in 1..1 << 4 {
+            let mut arr = as_arr(b);
+            sort4(&mut arr);
+            check_sorted(&arr);
         }
     }
 
     #[test]
     fn test_sort5() {
-        for a0 in 0..=1 {
-            for a1 in 0..=1 {
-                for a2 in 0..=1 {
-                    for a3 in 0..=1 {
-                        for a4 in 0..=1 {
-                            let mut arr = [a0, a1, a2, a3, a4];
-                            sort5(&mut arr);
-                            check_sorted(&arr);
-                        }
-                    }
-                }
-            }
+        for b in 1..1 << 5 {
+            let mut arr = as_arr(b);
+            sort5(&mut arr);
+            check_sorted(&arr);
         }
     }
 }
