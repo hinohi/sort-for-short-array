@@ -64,6 +64,12 @@ mod tests {
     }
 
     #[test]
+    fn test_as_arr() {
+        let arr: [i32; 5] = as_arr(0b10011);
+        assert_eq!(arr, [1, 1, 0, 0, 1]);
+    }
+
+    #[test]
     fn test_sort2() {
         for b in 1..1 << 2 {
             let mut arr = as_arr(b);
