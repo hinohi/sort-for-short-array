@@ -43,6 +43,44 @@ pub fn sort5<T: PartialOrd + Copy>(arr: &mut [T; 5]) {
     }
 }
 
+pub fn sort6<T: PartialOrd + Copy>(arr: &mut [T; 6]) {
+    unsafe {
+        sort_2(&mut arr[1], &mut arr[5]);
+        sort_2(&mut arr[0], &mut arr[4]);
+        sort_2(&mut arr[3], &mut arr[5]);
+        sort_2(&mut arr[2], &mut arr[4]);
+        sort_2(&mut arr[1], &mut arr[3]);
+        sort_2(&mut arr[0], &mut arr[2]);
+        sort_2(&mut arr[4], &mut arr[5]);
+        sort_2(&mut arr[2], &mut arr[3]);
+        sort_2(&mut arr[0], &mut arr[1]);
+        sort_2(&mut arr[1], &mut arr[4]);
+        sort_2(&mut arr[1], &mut arr[2]);
+        sort_2(&mut arr[3], &mut arr[4]);
+    }
+}
+
+pub fn sort7<T: PartialOrd + Copy>(arr: &mut [T; 7]) {
+    unsafe {
+        sort_2(&mut arr[2], &mut arr[6]);
+        sort_2(&mut arr[1], &mut arr[5]);
+        sort_2(&mut arr[0], &mut arr[4]);
+        sort_2(&mut arr[4], &mut arr[6]);
+        sort_2(&mut arr[3], &mut arr[5]);
+        sort_2(&mut arr[0], &mut arr[2]);
+        sort_2(&mut arr[2], &mut arr[4]);
+        sort_2(&mut arr[1], &mut arr[3]);
+        sort_2(&mut arr[5], &mut arr[6]);
+        sort_2(&mut arr[3], &mut arr[4]);
+        sort_2(&mut arr[1], &mut arr[2]);
+        sort_2(&mut arr[2], &mut arr[5]);
+        sort_2(&mut arr[0], &mut arr[3]);
+        sort_2(&mut arr[4], &mut arr[5]);
+        sort_2(&mut arr[2], &mut arr[3]);
+        sort_2(&mut arr[0], &mut arr[1]);
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -101,6 +139,24 @@ mod tests {
         for b in 1..1 << 5 {
             let mut arr = as_arr(b);
             sort5(&mut arr);
+            check_sorted(&arr);
+        }
+    }
+
+    #[test]
+    fn test_sort6() {
+        for b in 1..1 << 6 {
+            let mut arr = as_arr(b);
+            sort6(&mut arr);
+            check_sorted(&arr);
+        }
+    }
+
+    #[test]
+    fn test_sort7() {
+        for b in 1..1 << 7 {
+            let mut arr = as_arr(b);
+            sort7(&mut arr);
             check_sorted(&arr);
         }
     }
